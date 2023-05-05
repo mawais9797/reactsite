@@ -7,6 +7,7 @@ import image2 from "../images/js.jpg";
 import image3 from "../images/js.jpg";
 
 import Header from "./Header";
+import Footer from "./Footer";
 const Home = () => {
   return (
     <div>
@@ -39,6 +40,7 @@ const Home = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+      <Footer />
     </div>
   );
 };
