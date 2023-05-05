@@ -1,38 +1,23 @@
-.App {
-  text-align: center;
+.myNavBar{
+  padding-right: 314px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.liNavbar{
+  margin-right: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.myContainer{
+  padding-right: 80px;
+  text-align: justify;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+ .servicesCard{
+  width: 450px;
+  height: 350px;
+  margin-right: 15px;
+  float: left;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.formBorder{
+  width: 400px;
 }
