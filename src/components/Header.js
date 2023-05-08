@@ -33,6 +33,11 @@ const Header = () => {
                   Contact Us
                 </Link>
               </li>
+              <li class="nav-item liNavbar">
+                <Link nk class="nav-link active" to="/countries">
+                  Countries
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
