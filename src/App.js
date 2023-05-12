@@ -6,7 +6,12 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Services from "./components/Services";
 import Countries from "./components/Countries";
+import List from "./components/List";
 function App() {
+  const todo = [
+    { id: "1", title: "React" },
+    { id: "2", title: "Node" },
+  ];
   return (
     <BrowserRouter>
       <Routes>
@@ -15,6 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
         <Route path="/countries" element={<Countries />} />
+        <Route path="/list" element={<List todo={todo} />} />
         {/* <Route path="/countires" element={<Countires />} /> */}
       </Routes>
     </BrowserRouter>

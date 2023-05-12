@@ -38,6 +38,11 @@ const Header = () => {
                   Countries
                 </Link>
               </li>
+              <li class="nav-item liNavbar">
+                <Link nk class="nav-link active" to="/list">
+                  TodoList
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
