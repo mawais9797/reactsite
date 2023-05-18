@@ -61,12 +61,12 @@ const List = () => {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <select
                 name="role"
                 value={task.role}
                 onChange={handleInputChange}
-                class="form-select"
+                className="form-select"
                 id="exampleSelect1"
               >
                 <option>-- Select Role -- </option>

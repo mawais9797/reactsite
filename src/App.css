@@ -3,7 +3,7 @@
 }
 
 .liNavbar{
-  margin-right: 42px;
+  margin-right: 22px;
 }
 
 .myContainer{
@@ -20,4 +20,12 @@
 
 .formBorder{
   width: 400px;
+}
+
+.errMsg{
+  color: red
+}
+
+.inputField{
+  margin-left: 50px;
 }

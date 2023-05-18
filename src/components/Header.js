@@ -43,6 +43,16 @@ const Header = () => {
                   TodoList
                 </Link>
               </li>
+              <li class="nav-item liNavbar">
+                <Link nk class="nav-link active" to="/signup">
+                  Signup
+                </Link>
+              </li>
+              <li class="nav-item liNavbar">
+                <Link nk class="nav-link active" to="/hooks">
+                  Hooks
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
