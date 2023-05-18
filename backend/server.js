@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 var users = [
   { email: "fiaz@gmail.com", password: "asdf" },
   { email: "awais@gmail.com", password: "asdf" },
-  { name: "shahazaib@gmail.com", password: "asdf" },
+  { email: "shahzaib@gmail.com", password: "asdf" },
 ];
 var users1 = ["awais@gmail.com", "fiaz@gmail.com"];
 console.log(users[0].password);
@@ -24,11 +24,13 @@ app.post("/login", (req, res) => {
   userPassword = req.body.password;
   console.log(userEmail);
   var userResult = users.find((e) => e.email === userEmail);
+  console.log("userResult value =", userResult);
   if (userResult != undefined) {
     console.log("success");
-    res.send();
+    res.send(userResult);
   } else {
     console.log(userResult);
+    res.send("/login");
   }
   //   var userResult = users1.includes(userEmail);
   //   let obj = users.find((o) => o.email === userEmail);

@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../actions/UserAction";
+import { useNavigate, useLocation } from "react-router-dom";
 const Login = () => {
-  let navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
   };
+
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid Email").required("Email is REQUIRED"),
     password: Yup.string().required("Password is REQUIRED"),
   });
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const navigate = useNavigate();
+
+  // const redirect = location.search ? location.search.split("=")[1] : "/";
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
+
   const handleSubmit = (values) => {
     console.log("my values");
     console.log(values);
-    const uid = axios.post("http://localhost:4000/login", values);
-    console.log("user data");
-    if (uid != "" || uid != undefined) {
-      navigate("/");
-    }
+
+    let email = values.email;
+    let password = values.password;
+    dispatch(login(email, password));
   };
   return (
     <div>

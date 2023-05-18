@@ -29,3 +29,28 @@
 .inputField{
   margin-left: 50px;
 }
+
+.signupForm{
+  border: 1px solid;
+  
+  width: 500px;
+  margin-left: 250px;
+  margin-bottom: 70px;
+  padding-left: 50px;
+  padding-bottom: 15px;
+
+}
+
+.formField{
+  width: 400px;
+  
+}
+
+
+
+
+
+
+
+
+

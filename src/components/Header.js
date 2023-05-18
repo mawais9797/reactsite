@@ -33,11 +33,11 @@ const Header = () => {
                   Contact Us
                 </Link>
               </li>
-              <li class="nav-item liNavbar">
+              {/* <li class="nav-item liNavbar">
                 <Link nk class="nav-link active" to="/countries">
                   Countries
                 </Link>
-              </li>
+              </li> */}
               <li class="nav-item liNavbar">
                 <Link nk class="nav-link active" to="/list">
                   TodoList

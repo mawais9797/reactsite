@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useFetchData from "./useFetchData";
+import Header from "./Header";
 
 function Hooks() {
   const [count, setCount] = useState(0);
@@ -17,7 +18,9 @@ function Hooks() {
 
   return (
     <div>
+      <Header />
       <div className="container">
+        <br />
         <form>
           <input type="text" onChange={(e) => setUserInput(e.target.value)} />
         </form>
