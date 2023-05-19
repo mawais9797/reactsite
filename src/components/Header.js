@@ -49,6 +49,11 @@ const Header = () => {
                 </Link>
               </li>
               <li class="nav-item liNavbar">
+                <Link nk class="nav-link active" to="/employeedata">
+                  EmployeeData
+                </Link>
+              </li>
+              <li class="nav-item liNavbar">
                 <Link nk class="nav-link active" to="/hooks">
                   Hooks
                 </Link>

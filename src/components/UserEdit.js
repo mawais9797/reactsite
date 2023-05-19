@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Header from "./Header";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../actions/FormAction";
-// import { FontAwesomeIcon } from "@fortAwesomeIcon/react-fontawesom";
+import { useLocation, useParams } from "react-router-dom";
 
-const SignupForm = () => {
+const UserEdit = () => {
   const [userValue, setUserValue] = useState([]);
   const initialValues = {
     name: "",
@@ -16,7 +16,22 @@ const SignupForm = () => {
   };
 
   const dispatch = useDispatch();
-
+  //   const { email } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const email = searchParams.get("email");
+  const empData = useSelector((state) => state.empData);
+  const { empInfo } = empData;
+  console.log("employee information", empInfo);
+  const userEdit = () => {
+    console.log("this is empInfo = ", empInfo);
+    const user = Object.values(empInfo).filter((emp) => emp.email === email);
+    console.log("my user = ", user);
+  };
+  useEffect(() => {
+    userEdit();
+  }, [empInfo]);
+  console.log(email);
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().required("Email is required"),
@@ -38,7 +53,7 @@ const SignupForm = () => {
       <div className="container ">
         <br />
         <div className="signupForm">
-          <h1>Sign Up</h1>
+          <h1>User Edit Form</h1>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -170,4 +185,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default UserEdit;

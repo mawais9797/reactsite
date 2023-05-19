@@ -28,6 +28,10 @@ const Login = () => {
   useEffect(() => {
     if (userInfo) {
       navigate("/dashboard");
+      console.log("iffff");
+    } else {
+      console.log("elssssee");
+      navigate("/login");
     }
   }, [navigate, userInfo]);
 

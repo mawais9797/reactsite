@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+
 const Home = lazy(() => import("./components/Home"));
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact"));
@@ -8,8 +9,9 @@ const Services = lazy(() => import("./components/Services"));
 const Countries = lazy(() => import("./components/Countries"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const SignupForm = lazy(() => import("./components/SignupForm"));
-const Login = lazy(() => import("./components/Login"));
+const EmployeeData = lazy(() => import("./components/EmployeeData"));
 const Hooks = lazy(() => import("./components/Hooks"));
+const UserEdit = lazy(() => import("./components/UserEdit"));
 
 function App() {
   return (
@@ -23,8 +25,9 @@ function App() {
           {/* <Route path="/countries" element={<Countries />} /> */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/signup" element={<SignupForm />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/employeedata" element={<EmployeeData />} />
           <Route path="/hooks" element={<Hooks />} />
+          <Route path="/useredit" element={<UserEdit />} />
           {/* <Route path="/countires" element={<Countires />} /> */}
         </Routes>
       </Suspense>

@@ -6,30 +6,19 @@ import {
   USER_LOGOUT,
 } from "../constants/UserConstatns";
 
-export const login = (email, password) => async (dispatch) => {
+export const addUser = (values) => async (dispatch) => {
   //   debugger;
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const { data } = await axios.post(
-      "http://localhost:4000/login",
-      { email, password },
-      config
-    );
-    // debugger;
     dispatch({
       type: USER_LOGIN_SUCCESS,
-      payload: data,
+      payload: values,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("empInfo", JSON.stringify(values));
   } catch (error) {
     // debugger;
     dispatch({
@@ -40,9 +29,4 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     });
   }
-};
-
-export const logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
-  dispatch({ type: USER_LOGOUT });
 };
