@@ -5,9 +5,16 @@ import Header from "./Header";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../actions/FormAction";
 import { useLocation, useParams } from "react-router-dom";
+import { filter } from "fontawesome";
 
 const UserEdit = () => {
   const [userValue, setUserValue] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState();
+  const [company, setCompany] = useState("");
+  const [role, setRole] = useState("");
+  // const [email, setEmail] = useState();
+  // const [editUser, setEditUser] = useState();
   const initialValues = {
     name: "",
     company: "",
@@ -17,21 +24,27 @@ const UserEdit = () => {
 
   const dispatch = useDispatch();
   //   const { email } = useParams();
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const email = searchParams.get("email");
-  const empData = useSelector((state) => state.empData);
-  const { empInfo } = empData;
-  console.log("employee information", empInfo);
-  const userEdit = () => {
-    console.log("this is empInfo = ", empInfo);
-    const user = Object.values(empInfo).filter((emp) => emp.email === email);
-    console.log("my user = ", user);
-  };
+  const empData = useSelector((state) => state.users);
+  const id = searchParams.get("id");
+  const user = empData.filter((emp) => emp.id == id);
+  // setEmail(userEmail);
+  // debugger;
+  // const { empInfo } = empData;
+  // console.log("employee information", empInfo);
+  // const userEdit = () => {
+  //   // console.log("this is empInfo = ", empInfo);
+  //   const user = Object.keys(empInfo); //Object.values(empInfo);
+  //   console.log("my user = ", user);
+  // };
   useEffect(() => {
-    userEdit();
-  }, [empInfo]);
-  console.log(email);
+    // setEditUser(user);
+    // debugger;
+    // console.log("SELECTED User =", user[0]);
+  }, [id]);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().required("Email is required"),
@@ -39,11 +52,11 @@ const UserEdit = () => {
     role: Yup.string().required("Please Select a Role "),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleUpdate = (values, { resetForm }) => {
     console.log("here");
-    console.log(values.company);
-    setUserValue([...userValue, values]);
-    dispatch(addUser(values));
+    console.log(values);
+    // setUserValue([...userValue, values]);
+    // dispatch(addUser(values));
     resetForm();
   };
 
@@ -57,7 +70,7 @@ const UserEdit = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={handleUpdate}
           >
             <Form>
               <div className="formField">
@@ -67,6 +80,8 @@ const UserEdit = () => {
                 <br />
                 <Field
                   type="text"
+                  value={user[0].name}
+                  onChange={(e) => setName(e.target.name.value)}
                   id="name"
                   name="name"
                   className="form-control  "
@@ -88,6 +103,7 @@ const UserEdit = () => {
                   className="form-control "
                   id="exampleInputEmail1"
                   name="email"
+                  value={user[0].email}
                 />
                 <ErrorMessage
                   name="email"
@@ -102,22 +118,106 @@ const UserEdit = () => {
                   Company
                 </label>
                 <br />
-                <Field
-                  as="select"
-                  name="company"
-                  id="myCompany"
-                  className="form-control formField"
-                >
-                  <option value="">-- Select Company --</option>
-                  <option value="AppsGenii">AppsGenii</option>
-                  <option value="Google">Google</option>
-                  <option value="Facebook">Facebook</option>
-                </Field>
-                <ErrorMessage
-                  name="company"
-                  component="span"
-                  className="error errMsg"
-                />
+
+                {user[0].company == "Google"
+                  ? console.log("i am ", user[0].company)
+                  : console.log("i am not any comapny")}
+                {user[0].company == "AppsGenii" ? (
+                  <>
+                    <Field
+                      as="select"
+                      name="company"
+                      id="myCompany"
+                      className="form-control formField"
+                    >
+                      <option value="AppsGenii" selected>
+                        AppsGenii
+                      </option>
+                      <option value="Google">Google</option>
+                      <option value="Facebook">Facebook</option>
+                    </Field>
+                    <ErrorMessage
+                      name="company"
+                      component="span"
+                      className="error errMsg"
+                    />
+                  </>
+                ) : user[0].company == "Google" ? (
+                  <>
+                    <Field
+                      as="select"
+                      name="company"
+                      id="myCompany"
+                      className="form-control formField"
+                    >
+                      <option value="AppsGenii">AppsGenii</option>
+                      <option value="Google" selected>
+                        Google
+                      </option>
+                      <option value="Facebook">Facebook</option>
+                    </Field>
+                    <ErrorMessage
+                      name="company"
+                      component="span"
+                      className="error errMsg"
+                    />
+                  </>
+                ) : user[0].company == "Facebook" ? (
+                  <>
+                    <Field
+                      as="select"
+                      name="company"
+                      id="myCompany"
+                      className="form-control formField"
+                    >
+                      <option value="AppsGenii">AppsGenii</option>
+                      <option value="Google">Google</option>
+                      <option value="Facebook" selected>
+                        Facebook
+                      </option>
+                    </Field>
+                    <ErrorMessage
+                      name="company"
+                      component="span"
+                      className="error errMsg"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Field
+                      as="select"
+                      name="company"
+                      id="myCompany"
+                      className="form-control formField"
+                    >
+                      <option value="">-- Select Company --</option>
+                      <option value="AppsGenii">AppsGenii</option>
+                      <option value="Google">Google</option>
+                      <option value="Facebook">Facebook</option>
+                    </Field>
+                    <ErrorMessage
+                      name="company"
+                      component="span"
+                      className="error errMsg"
+                    />
+                  </>
+                )}
+                {/* <Field
+                    as="select"
+                    name="company"
+                    id="myCompany"
+                    className="form-control formField"
+                  >
+                    <option value="">-- Select Company --</option>
+                    <option value="AppsGenii">AppsGenii</option>
+                    <option value="Google">Google</option>
+                    <option value="Facebook">Facebook</option>
+                  </Field>
+                  <ErrorMessage
+                    name="company"
+                    component="span"
+                    className="error errMsg"
+                  /> */}
               </div>
               <span></span>
 

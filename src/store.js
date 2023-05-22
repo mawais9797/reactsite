@@ -1,33 +1,57 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { userLoginReducer } from "./reducers/UserReducer";
-import { addUserReducer } from "./reducers/FormReducer";
+import { createStore } from "redux";
 
-const reducer = combineReducers({
-  userLogin: userLoginReducer,
-  empData: addUserReducer,
-});
-
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
-  : null;
-
-const empInfoFromStorage = localStorage.getItem("empInfo")
-  ? JSON.parse(localStorage.getItem("empInfo"))
-  : null;
-
+// Define initial state
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage },
-  empData: { empInfo: empInfoFromStorage },
+  users: [],
 };
 
-const middleware = [thunk];
+// User reducer
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_USER":
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+      };
+    default:
+      return state;
+  }
+};
 
-const store = createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+// Create the Redux store
+const store = createStore(userReducer);
 
 export default store;
+
+// import { createStore, combineReducers, applyMiddleware } from "redux";
+// import thunk from "redux-thunk";
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import { userLoginReducer } from "./reducers/UserReducer";
+// import { addUserReducer } from "./reducers/FormReducer";
+
+// const reducer = combineReducers({
+//   // userLogin: userLoginReducer,
+//   empData: addUserReducer,
+// });
+
+// // const userInfoFromStorage = localStorage.getItem("userInfo")
+// //   ? JSON.parse(localStorage.getItem("userInfo"))
+// //   : null;
+
+// // const empInfoFromStorage = localStorage.getItem("empInfo")
+// //   ? JSON.parse(localStorage.getItem("empInfo"))
+// //   : null;
+
+// // const initialState = {
+// //   userLogin: { userInfo: userInfoFromStorage },
+// //   empData: { empInfo: empInfoFromStorage },
+// // };
+
+// const middleware = [thunk];
+
+// const store = createStore(
+//   addUserReducer,
+//   composeWithDevTools(applyMiddleware(...middleware))
+// );
+
+// export default store;

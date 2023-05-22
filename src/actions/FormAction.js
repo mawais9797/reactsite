@@ -6,27 +6,35 @@ import {
   USER_LOGOUT,
 } from "../constants/UserConstatns";
 
-export const addUser = (values) => async (dispatch) => {
-  //   debugger;
-  try {
-    dispatch({
-      type: USER_LOGIN_REQUEST,
-    });
+export function addUser(values) {
+  // debugger;
+  return {
+    type: USER_LOGIN_SUCCESS,
+    payload: values,
+  };
+}
 
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: values,
-    });
+// export const addUser = (values) => async (dispatch) => {
+//   // debugger;
+//   try {
+//     dispatch({
+//       type: USER_LOGIN_REQUEST,
+//     });
 
-    localStorage.setItem("empInfo", JSON.stringify(values));
-  } catch (error) {
-    // debugger;
-    dispatch({
-      type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+//     dispatch({
+//       type: USER_LOGIN_SUCCESS,
+//       payload: values,
+//     });
+
+//     // localStorage.setItem("empInfo", JSON.stringify(values));
+//   } catch (error) {
+//     // debugger;
+//     dispatch({
+//       type: USER_LOGIN_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };

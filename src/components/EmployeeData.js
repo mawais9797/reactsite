@@ -3,20 +3,30 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 
-const EmployeeData = ({ handleEdit }) => {
+const EmployeeData = () => {
   const [myUser, setMyUser] = useState([]);
+  const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const empData = useSelector((state) => state.empData);
-  const { empInfo } = empData;
-
-  useEffect(() => {
-    setMyUser([...myUser, empInfo]);
-    // Navigate(`/home?${email}`);
-  }, [empInfo]);
+  // const empData = useSelector((state) => state.empData);
+  const users = useSelector((state) => state.users);
+  // debugger;
+  // setMyUser([...myUser, users]);
+  // debugger;
+  // const { empInfo } = empData;
+  // debugger;
+  // useEffect(() => {
+  //   setMyUser([...myUser, users]);
+  //   // Navigate(`/home?${email}`);
+  // }, [users]);
   //   setMyUser([...myUser, empInfo]);
   //   //   setUserValue([...userValue, values]);
   // setMyUser([...myUser, empInfo]);
+
+  function handleDelete(event) {
+    event.preventDefault();
+    alert(userId);
+  }
 
   return (
     <div>
@@ -35,12 +45,11 @@ const EmployeeData = ({ handleEdit }) => {
             </tr>
           </thead>
           <tbody>
-            {Object.values(myUser).map((x, index) => {
+            {Object.values(users).map((x, index) => {
               return (
                 <>
-                  {console.log(x)}
                   <tr className="table-light">
-                    <th scope="row">{index + 1}</th>
+                    <th scope="row">{x.id}</th>
                     <td>{x.name}</td>
                     <td>{x.email}</td>
                     <td>{x.company}</td>
@@ -49,11 +58,16 @@ const EmployeeData = ({ handleEdit }) => {
                       <button
                         className="btn btn-sm btn-info"
                         style={{ marginRight: "5px" }}
-                        onClick={() => navigate(`/useredit?email=${x.email}`)}
+                        onClick={() => navigate(`/useredit?id=${x.id}`)}
                       >
                         Edit
                       </button>
-                      <button className="btn btn-sm btn-danger">Delete</button>
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={(e) => setUserId(x.id)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 </>

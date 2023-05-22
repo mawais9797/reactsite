@@ -3,11 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
-import { addUser } from "../actions/FormAction";
+import { addUser } from "../actions/Actions";
+import { useNavigate } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortAwesomeIcon/react-fontawesom";
 
 const SignupForm = () => {
-  const [userValue, setUserValue] = useState([]);
+  const [userValue, setUserValue] = useState("");
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     company: "",
@@ -25,11 +27,28 @@ const SignupForm = () => {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log("here");
-    console.log(values.company);
-    setUserValue([...userValue, values]);
-    dispatch(addUser(values));
+    // console.log("here");
+    // console.log(values.company);
+    // const newEmployee = { ...values };
+    // setUserValue((previous) => [...previous, newEmployee]);
+    // // debugger;
+    const newUser = {
+      id: Date.now(),
+      name: values.name,
+      email: values.email,
+      company: values.company,
+      role: values.role,
+    };
+    setUserValue([...userValue, newUser]);
+
+    // console.log("FormValues =", values);
+    // console.log("NewEmployee Values =", newEmployee);
+    // console.log("UserValueState =", userValue);
+    dispatch(addUser(newUser));
+
     resetForm();
+
+    navigate("/employeedata");
   };
 
   return (
@@ -152,7 +171,6 @@ const SignupForm = () => {
             {Object.values(userValue).map((x, index) => {
               return (
                 <>
-                  {console.log(x)}
                   <tr className="table-light">
                     <th scope="row">{index + 1}</th>
                     <td>{x.name}</td>
