@@ -65,144 +65,146 @@ const UserEdit = () => {
       <Header />
       <div className="container ">
         <br />
-        <div className="signupForm">
-          <h1>User Edit Form</h1>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleUpdate}
-          >
-            <Form>
-              <div className="formField">
-                <label htmlFor="name" className="formLabel">
-                  Name
-                </label>
-                <br />
-                <Field
-                  type="text"
-                  value={user[0].name}
-                  onChange={(e) => setName(e.target.name.value)}
-                  id="name"
-                  name="name"
-                  className="form-control  "
-                />
-                <ErrorMessage
-                  name="name"
-                  component="span"
-                  className="error errMsg"
-                />
-              </div>
-              <span></span>
+        {user != "" ? (
+          <>
+            <div className="signupForm">
+              <h1>User Edit Form</h1>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleUpdate}
+              >
+                <Form>
+                  <div className="formField">
+                    <label htmlFor="name" className="formLabel">
+                      Name
+                    </label>
+                    <br />
+                    <Field
+                      type="text"
+                      value={user[0].name}
+                      onChange={(e) => setName(e.target.name.value)}
+                      id="name"
+                      name="name"
+                      className="form-control  "
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="span"
+                      className="error errMsg"
+                    />
+                  </div>
+                  <span></span>
 
-              <div className="formField">
-                <label htmlFor="exampleInputEmail1" className="formLabel">
-                  Email address
-                </label>
-                <Field
-                  type="text"
-                  className="form-control "
-                  id="exampleInputEmail1"
-                  name="email"
-                  value={user[0].email}
-                />
-                <ErrorMessage
-                  name="email"
-                  component="span"
-                  className="error errMsg"
-                />
-                <span></span>
-              </div>
+                  <div className="formField">
+                    <label htmlFor="exampleInputEmail1" className="formLabel">
+                      Email address
+                    </label>
+                    <Field
+                      type="text"
+                      className="form-control "
+                      id="exampleInputEmail1"
+                      name="email"
+                      value={user[0].email}
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="span"
+                      className="error errMsg"
+                    />
+                    <span></span>
+                  </div>
 
-              <div className="formField">
-                <label htmlFor="myCompany" className="formLabel">
-                  Company
-                </label>
-                <br />
+                  <div className="formField">
+                    <label htmlFor="myCompany" className="formLabel">
+                      Company
+                    </label>
+                    <br />
 
-                {user[0].company == "Google"
-                  ? console.log("i am ", user[0].company)
-                  : console.log("i am not any comapny")}
-                {user[0].company == "AppsGenii" ? (
-                  <>
-                    <Field
-                      as="select"
-                      name="company"
-                      id="myCompany"
-                      className="form-control formField"
-                    >
-                      <option value="AppsGenii" selected>
-                        AppsGenii
-                      </option>
-                      <option value="Google">Google</option>
-                      <option value="Facebook">Facebook</option>
-                    </Field>
-                    <ErrorMessage
-                      name="company"
-                      component="span"
-                      className="error errMsg"
-                    />
-                  </>
-                ) : user[0].company == "Google" ? (
-                  <>
-                    <Field
-                      as="select"
-                      name="company"
-                      id="myCompany"
-                      className="form-control formField"
-                    >
-                      <option value="AppsGenii">AppsGenii</option>
-                      <option value="Google" selected>
-                        Google
-                      </option>
-                      <option value="Facebook">Facebook</option>
-                    </Field>
-                    <ErrorMessage
-                      name="company"
-                      component="span"
-                      className="error errMsg"
-                    />
-                  </>
-                ) : user[0].company == "Facebook" ? (
-                  <>
-                    <Field
-                      as="select"
-                      name="company"
-                      id="myCompany"
-                      className="form-control formField"
-                    >
-                      <option value="AppsGenii">AppsGenii</option>
-                      <option value="Google">Google</option>
-                      <option value="Facebook" selected>
-                        Facebook
-                      </option>
-                    </Field>
-                    <ErrorMessage
-                      name="company"
-                      component="span"
-                      className="error errMsg"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Field
-                      as="select"
-                      name="company"
-                      id="myCompany"
-                      className="form-control formField"
-                    >
-                      <option value="">-- Select Company --</option>
-                      <option value="AppsGenii">AppsGenii</option>
-                      <option value="Google">Google</option>
-                      <option value="Facebook">Facebook</option>
-                    </Field>
-                    <ErrorMessage
-                      name="company"
-                      component="span"
-                      className="error errMsg"
-                    />
-                  </>
-                )}
-                {/* <Field
+                    {user[0].company == "Google"
+                      ? console.log("i am ", user[0].company)
+                      : console.log("i am not any comapny")}
+                    {user[0].company == "AppsGenii" ? (
+                      <>
+                        <Field
+                          as="select"
+                          name="company"
+                          id="myCompany"
+                          className="form-control formField"
+                        >
+                          <option value="AppsGenii" selected>
+                            AppsGenii
+                          </option>
+                          <option value="Google">Google</option>
+                          <option value="Facebook">Facebook</option>
+                        </Field>
+                        <ErrorMessage
+                          name="company"
+                          component="span"
+                          className="error errMsg"
+                        />
+                      </>
+                    ) : user[0].company == "Google" ? (
+                      <>
+                        <Field
+                          as="select"
+                          name="company"
+                          id="myCompany"
+                          className="form-control formField"
+                        >
+                          <option value="AppsGenii">AppsGenii</option>
+                          <option value="Google" selected>
+                            Google
+                          </option>
+                          <option value="Facebook">Facebook</option>
+                        </Field>
+                        <ErrorMessage
+                          name="company"
+                          component="span"
+                          className="error errMsg"
+                        />
+                      </>
+                    ) : user[0].company == "Facebook" ? (
+                      <>
+                        <Field
+                          as="select"
+                          name="company"
+                          id="myCompany"
+                          className="form-control formField"
+                        >
+                          <option value="AppsGenii">AppsGenii</option>
+                          <option value="Google">Google</option>
+                          <option value="Facebook" selected>
+                            Facebook
+                          </option>
+                        </Field>
+                        <ErrorMessage
+                          name="company"
+                          component="span"
+                          className="error errMsg"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Field
+                          as="select"
+                          name="company"
+                          id="myCompany"
+                          className="form-control formField"
+                        >
+                          <option value="">-- Select Company --</option>
+                          <option value="AppsGenii">AppsGenii</option>
+                          <option value="Google">Google</option>
+                          <option value="Facebook">Facebook</option>
+                        </Field>
+                        <ErrorMessage
+                          name="company"
+                          component="span"
+                          className="error errMsg"
+                        />
+                      </>
+                    )}
+                    {/* <Field
                     as="select"
                     name="company"
                     id="myCompany"
@@ -218,68 +220,47 @@ const UserEdit = () => {
                     component="span"
                     className="error errMsg"
                   /> */}
-              </div>
-              <span></span>
+                  </div>
+                  <span></span>
 
-              <div className="formField">
-                <label htmlFor="role" className="formLabel">
-                  Role
-                </label>
-                <br />
-                <Field
-                  as="select"
-                  name="role"
-                  id="role"
-                  className="form-control formField"
-                >
-                  <option value="">-- Select A Role --</option>
-                  <option value="Intern">Intern</option>
-                  <option value="Developer">Developer</option>
-                  <option value="CTO">CTO</option>
-                </Field>
-                <ErrorMessage
-                  name="role"
-                  component="span"
-                  className="error errMsg"
-                />
-              </div>
-              <span></span>
+                  <div className="formField">
+                    <label htmlFor="role" className="formLabel">
+                      Role
+                    </label>
+                    <br />
+                    <Field
+                      as="select"
+                      name="role"
+                      id="role"
+                      className="form-control formField"
+                    >
+                      <option value="">-- Select A Role --</option>
+                      <option value="Intern">Intern</option>
+                      <option value="Developer">Developer</option>
+                      <option value="CTO">CTO</option>
+                    </Field>
+                    <ErrorMessage
+                      name="role"
+                      component="span"
+                      className="error errMsg"
+                    />
+                  </div>
+                  <span></span>
 
-              <br />
+                  <br />
 
-              <button className="btn btn-lg btn-success " type="submit">
-                Sign Up
-              </button>
-            </Form>
-          </Formik>
-        </div>
-        <table className="table table-light table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Sr.No.</th>
-              <th scope="col">Employee Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Company</th>
-              <th scope="col">Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.values(userValue).map((x, index) => {
-              return (
-                <>
-                  {console.log(x)}
-                  <tr className="table-light">
-                    <th scope="row">{index + 1}</th>
-                    <td>{x.name}</td>
-                    <td>{x.email}</td>
-                    <td>{x.company}</td>
-                    <td>{x.role}</td>
-                  </tr>
-                </>
-              );
-            })}
-          </tbody>
-        </table>
+                  <button className="btn btn-lg btn-success " type="submit">
+                    Edit
+                  </button>
+                </Form>
+              </Formik>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2>NO Data</h2>
+          </>
+        )}
       </div>
     </div>
   );
