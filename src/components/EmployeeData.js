@@ -5,19 +5,22 @@ import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { editUser, updateUser } from "../actions/Actions";
+import { deleteUser, editUser, updateUser } from "../actions/Actions";
 
 const EmployeeData = () => {
   const [myUser, setMyUser] = useState(useSelector((state) => state.users));
+  // debugger;
   const [userName, setUserName] = useState("");
   const [updateEmployee, setUpdateEmployee] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  // let userFromStore = "";
   const userFromStore = useSelector((state) => state.editUser);
+  // debugger;
   console.log("my user store", userFromStore);
   let initialValues = null;
-  if (userFromStore) {
+  if (userFromStore != "") {
+    console.log("IF BLOCK");
     initialValues = {
       name: userFromStore[0].name,
       company: userFromStore[0].company,
@@ -25,6 +28,7 @@ const EmployeeData = () => {
       role: userFromStore[0].role,
     };
   } else {
+    console.log("ELSE BLOCK");
     initialValues = {
       name: "",
       company: "",
@@ -42,9 +46,10 @@ const EmployeeData = () => {
   function handleDelete(id) {
     // setMyUser(users);
 
-    const updatedUsers = myUser.filter((employee) => employee.id !== id);
-    console.log("updatedUsers", updatedUsers);
-    setMyUser(updatedUsers);
+    // const userRemove = myUser.filter((employee) => employee.id === id);
+    dispatch(deleteUser(id, myUser));
+    // console.log("userRemove", userRemove);
+    //setMyUser(updatedUsers);
   }
 
   function handleUpdateClick(id) {
@@ -76,35 +81,38 @@ const EmployeeData = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.values(myUser).map((x, index) => {
-              return (
-                <>
-                  <tr className="table-light">
-                    <th scope="row">{index + 1}</th>
-                    <td>{x.name}</td>
-                    <td>{x.email}</td>
-                    <td>{x.company}</td>
-                    <td>{x.role}</td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-info"
-                        style={{ marginRight: "5px" }}
-                        onClick={() => handleUpdateClick(x.id)}
-                      >
-                        {/* onClick={() => navigate(`/useredit?id=${x.id}`)} */}
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={(e) => handleDelete(x.id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                </>
-              );
-            })}
+            {myUser == undefined
+              ? console.log("yessss")
+              : Object.values(myUser).map((x, index) => {
+                  return (
+                    <>
+                      <tr className="table-light">
+                        <th scope="row">{index + 1}</th>
+                        <td>{x.name}</td>
+                        <td>{x.email}</td>
+                        <td>{x.company}</td>
+                        <td>{x.role}</td>
+                        <td>
+                          <button
+                            className="btn btn-sm btn-info"
+                            style={{ marginRight: "5px" }}
+                            onClick={() => handleUpdateClick(x.id)}
+                          >
+                            {/* onClick={() => navigate(`/useredit?id=${x.id}`)} */}
+                            Edit
+                          </button>
+                          <button
+                            className="btn btn-sm btn-danger"
+                            onClick={(e) => handleDelete(x.id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    </>
+                  );
+                })}
+            {}
           </tbody>
         </table>
       </div>
@@ -146,17 +154,6 @@ const EmployeeData = () => {
                     className="form-control "
                     id="exampleInputEmail1"
                     name="email"
-                    value={userFromStore[0].email}
-                    onChange={(e) => {
-                      const updatedEmployee = {
-                        ...userFromStore[0],
-                        email: e.target.value,
-                      };
-                      setUpdateEmployee([
-                        updatedEmployee,
-                        ...userFromStore.slice(1),
-                      ]);
-                    }}
                   />
                   <ErrorMessage
                     name="email"

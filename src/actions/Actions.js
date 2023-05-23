@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 export const addUser = (user) => {
   //   debugger;
   return {
@@ -13,6 +11,21 @@ export const editUser = (userEdit) => {
   return {
     type: "USER_TO_BE_EDIT",
     payload: userEdit,
+  };
+};
+
+export const deleteUser = (id, allUsers) => {
+  // const updatedUsers = allUsers.map((user) =>
+  //   user.email !== userRemove.email ? userRemove : user
+  // );
+  // );
+  const list = allUsers.filter((employee) => employee.id !== id);
+  debugger;
+  // console.log("deleting this USER", userRemove);
+  console.log("Updated LIST after DELETE", list);
+  return {
+    type: "DELETE_USER",
+    payload: list,
   };
 };
 

@@ -1,39 +1,20 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import userReducer from "./reducers/UserReducer";
 
 // Define initial state
-const initialState = {
-  users: [],
-  editUser: null,
-};
+
 
 // User reducer
-const userReducer = (state = initialState, action) => {
-  // debugger;
-  switch (action.type) {
-    case "ADD_USER":
-      return {
-        ...state,
-        users: [...state.users, action.payload],
-      };
-    case "USER_TO_BE_EDIT":
-      return {
-        ...state,
-        editUser: action.payload,
-      };
 
-    case "USER_HAS_UPDATE":
-      return {
-        ...state,
-        users: action.payload,
-      };
-
-    default:
-      return state;
-  }
-};
-
+// debugger;
+const middleware = [thunk];
 // Create the Redux store
-const store = createStore(userReducer);
+const store = createStore(
+  userReducer,
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 export default store;
 
