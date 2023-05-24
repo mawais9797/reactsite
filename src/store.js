@@ -1,10 +1,14 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import userReducer from "./reducers/UserReducer";
+import studentReducer from "./reducers/StudentReducer";
 
+const reducer = combineReducers({
+  users: userReducer,
+  students: studentReducer,
+});
 // Define initial state
-
 
 // User reducer
 
@@ -12,7 +16,7 @@ import userReducer from "./reducers/UserReducer";
 const middleware = [thunk];
 // Create the Redux store
 const store = createStore(
-  userReducer,
+  reducer,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 

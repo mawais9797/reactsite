@@ -24,7 +24,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case "DELETE_USER":
-      debugger;
+      // debugger;
       return {
         ...state,
         users: action.payload,

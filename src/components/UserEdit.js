@@ -4,46 +4,46 @@ import * as Yup from "yup";
 import Header from "./Header";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../actions/FormAction";
-import { useLocation, useParams } from "react-router-dom";
-import { filter } from "fontawesome";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { filter, userEdit } from "fontawesome";
+import { updateUser } from "../actions/Actions";
 
 const UserEdit = () => {
-  const [userValue, setUserValue] = useState([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState();
-  const [company, setCompany] = useState("");
-  const [role, setRole] = useState("");
+  // const [userValue, setUserValue] = useState([]);
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState();
+  // const [company, setCompany] = useState("");
+  // const [role, setRole] = useState("");
   // const [email, setEmail] = useState();
   // const [editUser, setEditUser] = useState();
-  const initialValues = {
-    name: "",
-    company: "",
-    email: "",
-    role: "",
-  };
+  const editUser = useSelector((state) => state.users.editUser);
+  const allUsers = useSelector((state) => state.users.users);
+  const navigate = useNavigate();
+  // debugger;
+  let initialValues = null;
+  if (editUser != undefined) {
+    initialValues = {
+      name: editUser[0].name,
+      company: editUser[0].company,
+      email: editUser[0].email,
+      role: editUser[0].role,
+    };
+  } else {
+    initialValues = {
+      name: "",
+      company: "",
+      email: "",
+      role: "",
+    };
+  }
 
   const dispatch = useDispatch();
-  //   const { email } = useParams();
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const empData = useSelector((state) => state.users);
-  const id = searchParams.get("id");
-  const user = empData.filter((emp) => emp.id == id);
-  // setEmail(userEmail);
-  // debugger;
-  // const { empInfo } = empData;
-  // console.log("employee information", empInfo);
-  // const userEdit = () => {
-  //   // console.log("this is empInfo = ", empInfo);
-  //   const user = Object.keys(empInfo); //Object.values(empInfo);
-  //   console.log("my user = ", user);
-  // };
-  useEffect(() => {
-    // setEditUser(user);
-    // debugger;
-    // console.log("SELECTED User =", user[0]);
-  }, [id]);
+  // useEffect(() => {
+  //   // setEditUser(user);
+  //   // debugger;
+  //   // console.log("SELECTED User =", user[0]);
+  // }, []);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -52,12 +52,18 @@ const UserEdit = () => {
     role: Yup.string().required("Please Select a Role "),
   });
 
-  const handleUpdate = (values, { resetForm }) => {
+  const handleUpdate = (values) => {
+    // debugger;
+    const key = "id";
+    values[key] = editUser[0].id;
     console.log("here");
-    console.log(values);
+    console.log(allUsers);
+    debugger;
+    dispatch(updateUser(values, allUsers));
+
     // setUserValue([...userValue, values]);
     // dispatch(addUser(values));
-    resetForm();
+    navigate("/employeedata");
   };
 
   return (
@@ -65,7 +71,7 @@ const UserEdit = () => {
       <Header />
       <div className="container ">
         <br />
-        {user != "" ? (
+        {userEdit != "" ? (
           <>
             <div className="signupForm">
               <h1>User Edit Form</h1>
@@ -82,8 +88,6 @@ const UserEdit = () => {
                     <br />
                     <Field
                       type="text"
-                      value={user[0].name}
-                      onChange={(e) => setName(e.target.name.value)}
                       id="name"
                       name="name"
                       className="form-control  "
@@ -105,7 +109,6 @@ const UserEdit = () => {
                       className="form-control "
                       id="exampleInputEmail1"
                       name="email"
-                      value={user[0].email}
                     />
                     <ErrorMessage
                       name="email"
@@ -121,10 +124,7 @@ const UserEdit = () => {
                     </label>
                     <br />
 
-                    {user[0].company == "Google"
-                      ? console.log("i am ", user[0].company)
-                      : console.log("i am not any comapny")}
-                    {user[0].company == "AppsGenii" ? (
+                    {userEdit[0].company == "AppsGenii" ? (
                       <>
                         <Field
                           as="select"
@@ -144,7 +144,7 @@ const UserEdit = () => {
                           className="error errMsg"
                         />
                       </>
-                    ) : user[0].company == "Google" ? (
+                    ) : userEdit[0].company == "Google" ? (
                       <>
                         <Field
                           as="select"
@@ -164,7 +164,7 @@ const UserEdit = () => {
                           className="error errMsg"
                         />
                       </>
-                    ) : user[0].company == "Facebook" ? (
+                    ) : userEdit[0].company == "Facebook" ? (
                       <>
                         <Field
                           as="select"

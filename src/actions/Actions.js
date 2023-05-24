@@ -6,8 +6,8 @@ export const addUser = (user) => {
   };
 };
 
-export const editUser = (userEdit) => {
-  // debugger;
+export const editUser = (id, allUsers) => {
+  const userEdit = allUsers.filter((user) => user.id === id);
   return {
     type: "USER_TO_BE_EDIT",
     payload: userEdit,
@@ -30,14 +30,15 @@ export const deleteUser = (id, allUsers) => {
 };
 
 export const updateUser = (values, allUsers) => {
-  // debugger;
+  debugger;
 
   console.log("Action allUsers =", allUsers);
   console.log("Action Values =", values);
 
   const updatedUsers = allUsers.map((user) =>
-    user.email === values.email ? values : user
+    user.id === values.id ? values : user
   );
+  debugger;
   //   if (user.id == values.id) {
   //     allUsers[user] = values;
   //   }

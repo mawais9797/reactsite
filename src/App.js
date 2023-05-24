@@ -12,6 +12,9 @@ const SignupForm = lazy(() => import("./components/SignupForm"));
 const EmployeeData = lazy(() => import("./components/EmployeeData"));
 const Hooks = lazy(() => import("./components/Hooks"));
 const UserEdit = lazy(() => import("./components/UserEdit"));
+const StudentForm = lazy(() => import("./components/StudentForm"));
+const StudentList = lazy(() => import("./components/StudentList"));
+const StudentEdit = lazy(() => import("./components/StudentEdit"));
 
 function App() {
   return (
@@ -28,7 +31,9 @@ function App() {
           <Route path="/employeedata" element={<EmployeeData />} />
           <Route path="/hooks" element={<Hooks />} />
           <Route path="/useredit" element={<UserEdit />} />
-          {/* <Route path="/countires" element={<Countires />} /> */}
+          <Route path="/studentform" element={<StudentForm />} />
+          <Route path="/studentlist" element={<StudentList />} />
+          <Route path="/studentedit" element={<StudentEdit />} />
         </Routes>
       </Suspense>
     </Router>

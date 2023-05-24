@@ -54,8 +54,13 @@ const Header = () => {
                 </Link>
               </li>
               <li class="nav-item liNavbar">
-                <Link nk class="nav-link active" to="/hooks">
-                  Hooks
+                <Link nk class="nav-link active" to="/studentform">
+                  StudentForm
+                </Link>
+              </li>
+              <li class="nav-item liNavbar">
+                <Link nk class="nav-link active" to="/studentlist">
+                  StudentList
                 </Link>
               </li>
             </ul>
