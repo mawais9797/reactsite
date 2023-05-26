@@ -11,7 +11,7 @@ var users = [
   { email: "awais@gmail.com", password: "asdf" },
   { email: "shahzaib@gmail.com", password: "asdf" },
 ];
-var users1 = ["awais@gmail.com", "fiaz@gmail.com"];
+// var users1 = ["awais@gmail.com", "fiaz@gmail.com"];
 console.log(users[0].password);
 
 app.get("/", (req, res) => {

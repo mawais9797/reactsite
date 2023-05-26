@@ -2,7 +2,8 @@ import React from "react";
 import { Formik, FieldArray, Field, Form, ErrorMessage } from "formik";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
-import { addStudent } from "../actions/StudentAction";
+import { addStudent, newData } from "../actions/StudentAction";
+// import "../App.css";
 
 const StudentForm = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,8 @@ const StudentForm = () => {
     const key = "id";
     values[key] = id;
     console.log("Student Form Submit =", values);
-    dispatch(addStudent(values));
+    // dispatch(addStudent(values));
+    dispatch(newData(values));
     resetForm();
     // Here, you can perform further actions like sending the data to a server or updating the state
   };
@@ -32,12 +34,14 @@ const StudentForm = () => {
           {({ values }) => (
             <Form>
               <div className="formField">
-                <label htmlFor="name">Name:</label>
+                <label htmlFor="name" className="">
+                  Name:
+                </label>
                 <Field
                   type="text"
                   id="name"
                   name="name"
-                  className="form-control"
+                  className="form-control inpuField"
                 />
               </div>
               <br />
@@ -47,7 +51,7 @@ const StudentForm = () => {
                   type="text"
                   id="age"
                   name="age"
-                  className="form-control"
+                  className="form-control inputField"
                 />
               </div>
               <br />
@@ -82,11 +86,11 @@ const StudentForm = () => {
                               type="text"
                               id={`year${index}`}
                               name={`education[${index}].year`}
-                              className="form-control"
+                              className="form-control "
                             />
                             <br />
                             <button
-                              className="btn btn-danger btn-md"
+                              className="btn btn-danger btn-sm rounded"
                               type="button"
                               onClick={() => remove(index)}
                             >

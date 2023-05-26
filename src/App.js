@@ -15,6 +15,7 @@ const UserEdit = lazy(() => import("./components/UserEdit"));
 const StudentForm = lazy(() => import("./components/StudentForm"));
 const StudentList = lazy(() => import("./components/StudentList"));
 const StudentEdit = lazy(() => import("./components/StudentEdit"));
+const Login = lazy(() => import("./components/Login"));
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/studentform" element={<StudentForm />} />
           <Route path="/studentlist" element={<StudentList />} />
           <Route path="/studentedit" element={<StudentEdit />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Suspense>
     </Router>

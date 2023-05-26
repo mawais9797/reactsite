@@ -32,14 +32,14 @@
   color: red
 }
 
-.inputField{
-  margin-left: 50px;
+Formik Field .inputField{
+  border-color: red;
 }
 
 .signupForm{
   border: 1px solid;
   
-  width: 500px;
+  width: 800px;
   margin-left: 250px;
   margin-bottom: 70px;
   padding-left: 50px;
